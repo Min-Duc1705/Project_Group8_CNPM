@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alex Brush|Allerta|Bagel Fat One">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <body>
+        <script src="script.js"></script>
+        <div class="container">
+            <h2>Thêm sách</h2>
+            <div class="image-add">
+                <form>
+                    <div class="image-up">
+                        <div class="title1">Tải ảnh</div></br>
+                        <label for="file-upload" class="custom-file-upload">
+                            <i class="material-icons" style="font-size:48px;color:white">add_circle_outline</i>
+                        </label>
+                        <input type="file" id="file-upload">
+                    </div>
+                    <div class="author">
+                        <div class="title2">Tên Tác Giả</div></br>
+                        <input type="text" id="name">
+                    </div>
+                    <div class="publisher">
+                        <div class="title3">Tên Sách</div></br>
+                        <input type="text" id="publish" placeholder="type here...">
+                    </div>
+                    <div class="description">
+                        <div class="title4">Mô Tả về sách</div></br>
+                        <textarea class="desc"></textarea>
+                    </div>
+            <!--        <input type="submit" value="thêm sách"                -->
+                    
+                    <!-- important: bình thường làm form để upload, ngta sẽ dùng <input type="submit"> nhưng vì ko dùng đến cơ sở dữ liệu nên anh sẽ chỉ sử dụng button thay thế -->
+                    <!-- type submit dùng trong <form> mà ko có các file java servlet hay jsp hay php sẽ khiến trang web bị lỗi -->
+                    
+                    <p><div class="some-text">dưới đây là 2 cách submit</div>
+                    <p><button class="alt-submit-button-add-text" type="button" onclick="showText()">thêm sách (hiện chữ)</button>
+                    <p id="text-show"></p>
+
+                    <p><button class="alt-submit-button-notification" onclick="notificate()">thêm sách (thông báo)</button>
+                    
+                    <!-- anh phải thêm type="button" để tránh tải lại web vì các nút được đặt mặc định là submit(sẽ tải lại trang web mỗi lần bấm nút loại submit) -->
+
+                    <!-- </br> là để xuống dòng ngay sát bên dưới, </p> là để xuống dòng nhưng cách thêm một đoạn -->
+                </form>
+            </div>
+        </div>
+    </body>
+
+</html>

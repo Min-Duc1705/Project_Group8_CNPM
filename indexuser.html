@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý thư viện</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="./js/mixitup.min.js"></script>
+    <script src="./js/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <section class="container">
+        <!-- Header section -->
+        <header class="header">
+            <section class="bar">
+                <i class="fa-solid fa-bars menu"></i>
+            </section>
+            <section class="logo main">
+                <img src="data:image/png;base64,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" alt="logo">
+            </section>
+            <section class="overlay"></section>
+            <nav class="nav">
+                <img src="" style="display: none;" alt="">
+                <section class="header-top">
+                    <section class="logo">
+                        <img src="./images/logobanner.png" alt="logo">
+                    </section>
+                    <i class="fa-solid fa-xmark close"></i>
+                </section>
+                <ul class="ul-main">
+                    <li><a href="indexuser.html" class="active">Trang Chủ</a></li>
+                    <li><a href="./GioiThieu.html">Giới Thiệu</a></li>
+                    <li>
+                        <section class="main-subnav">
+                            <a href="./sach.html">Loại sách</a>
+                            <i class="fa-solid fa-angle-down down"></i>
+                            <ul class="subnav">
+                                <li>
+                                    <a href="tt.html">
+                                        <i class="fa-solid fa-caret-right"></i>
+                                        Truyện tranh
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./ttvh.html">
+                                        <i class="fa-solid fa-caret-right"></i>
+                                      Tiểu thuyết - văn học
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./ktct.html">
+                                        <i class="fa-solid fa-caret-right"></i>
+                                     Kinh tế chính trị
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+                    </li>
+                    <li><a href="./TinTuc.html">Tin Tức</a></li>
+                    <li><a href="./LienHe.html">Liên hệ</a></li>
+
+                </ul>
+            </nav>
+            <section class="more">
+                <section class="search-box">
+                    <input type="text" class="search-box__input" placeholder="Tìm kiếm" />
+                    <button class="search-box__btn button-search">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    </button>
+                </section>
+                <section class="user group-account">
+                    <i class="fa-solid fa-user"></i>
+                    <section class="group">
+                        <a href="./DangNhap.html" class="btn btn__signin">Đăng Xuất</a>
+                       
+                    </section>
+                </section>
+                <section class="cart">
+                    <a href="./cart.html">
+                        <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                    </a>
+                </section>
+                
+            </section>
+        </header>
+       
+        </section>
+        <!-- Collection section -->
+        <section class="section-collection">
+            <section class="collection">
+                <section class="col-1 col">
+                    <section class="content">
+                        <h1 class="title" >Truyện tranh</h1>
+                        <span>Truyện tranh hay mạn họa là một phương tiện được sử dụng để diễn đạt ý tưởng bằng hình ảnh, thường kết hợp với văn bản hoặc thông tin hình ảnh khác.
+                        </span>
+                    </section>
+                </section>
+                <section class="col-2 col">
+                    <section class="content">
+                        <h1 class="title">Tiểu thuyết - văn học</h1>
+                        <span>Tiểu thuyết là một thể loại văn xuôi có hư cấu, thông qua nhân vật, hoàn cảnh, sự việc để phản ánh bức tranh xã hội rộng lớn và những vấn đề của cuộc sống con người
+                        </span>
+                    </section>
+                </section>
+                <section class="col-3 col">
+                    <section class="content">
+                        <h1 class="title">Kinh tế chính trị</h1>
+                        <span>Kinh tế chính trị là một môn khoa học xã hội nghiên cứu việc sản xuất và trao đổi hàng hóa đặt trong mối quan hệ với chính trị dưới nhãn quan của chính trị gia.
+                        </span>
+                    </section>
+                </section>
+                <section class="col-4 col">
+                    <section class="content">
+                        <h1 class="title">Updating</h1>
+                        <span>Chúng tôi đang tiến hành cập nhật thêm nhiều thể loại sách mới trong thời gian sớm nhất.
+                        </span>
+                    </section>
+                </section>
+            </section>
+        </section>
+        <!-- chọn list -->
+        <section class="content">
+            <!-- giới thiệu -->
+            <section class="about-us">
+                <h3 class="text-gradient">VỀ CHÚNG TÔI</h3>
+                <p>Chúng tôi không chỉ là nơi chứa sách mà còn là biểu tượng của sự tôn vinh tri thức và nền văn hóa của một xã hội.
+                 Nó là một nơi tạo điều kiện cho việc học hỏi, nghiên cứu, và trải nghiệm sự phong phú của kiến thức con người.
+                </p>
+            </section>
+            <!-- lựa chọn -->
+            <section class="product-list">
+                <h2 class="text-gradient">DANH MỤC SÁCH</h2>
+                <section class="product-list-container grid">
+                    <ul class="product-filters">
+                        <li>
+                            <button class="product__item active-product" data-filter="raucu">
+                                <span>Mới  </span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="product__item" data-filter=".hoaqua">
+                                <span>Truyện tranh</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="product__item" data-filter=".haisan">
+                                <span>Tiểu thuyết - văn học  </span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="product__item" data-filter=".cacloaihat">
+                                <span>Kinh tế chính trị</span>
+                            </button>
+                        </li>
+                    </ul>
+                    <section class="product-grid">
+                        <section class="product-grid-inner">
+                            <article class="product-card mix tesla">
+                                <section class="product-thumbnail">
+                                    <img src="https://cdn0.fahasa.com/media/catalog/product/i/m/image_228633.jpg?_gl=1*183qj9i*_ga*MTU1NzIzODkxNi4xNjk1ODc3NzMw*_ga_460L9JMC2G*MTY5NTk2MzY3MS41LjEuMTY5NTk2Mzg3NS40NC4wLjA." alt="">
+                                </section>
+                                <section class="product-content">
+                                    <h3 class="product-name">Ảo Ảnh Hạnh Phúc</h3>
+                                    <ul class="icon-group">
+                                        <li>
+                                            <a href="/chitietsach.html">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </section>
+                            </article>
+                        </section>
+                        
+                        <section class="product-grid-inner">
+                            <article class="product-card mix thucphamtuoisong">
+                                <section class="product-thumbnail">
+                                    <img src="https://salt.tikicdn.com/cache/368x368/media/catalog/product/t/u/tuoi-tre-dang-gia-bao-nhieu-u547-d20161012-t113832-888179.u3059.d20170616.t095744.390222.jpg.webp" alt="">
+                                </section>
+                                <section class="product-content">
+                                    <h3 class="product-name">Tuổi Trẻ Đáng Giá Bao Nhiêu</h3>
+                                </section>
+                                <ul class="icon-group">
+                                    <li>
+                                        <a href="/chitietsach.html">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </article>
+                        </section>
+                        <section class="product-grid-inner">
+                            <article class="product-card mix cacloaihat">
+                                <section class="product-thumbnail">
+                                    <img src="https://cdn0.fahasa.com/media/catalog/product/b/_/b_a-1---r_c-r_i-gi_i600.jpg?_gl=1*h33cjd*_ga*MTU1NzIzODkxNi4xNjk1ODc3NzMw*_ga_460L9JMC2G*MTY5NTk2MzY3MS41LjEuMTY5NTk2NDEyOS4zNy4wLjA." alt="">
+                                </section>
+                                <section class="product-content">
+                                    <h3 class="product-name">Rắc Rối Giới</h3>
+                                </section>
+                                <ul class="icon-group">
+                                    <li>
+                                        <a href="/chitietsach.html">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </article>
+                        </section>
+                        <section class="product-grid-inner">
+                            <article class="product-card mix raucu">
+                                <section class="product-thumbnail">
+                                    <img src="https://cdn0.fahasa.com/media/catalog/product/d/o/doraemon-truyen-dai---nobiata-va-nhung-dung-si-co-canh---tap-21---tb-2023.jpg" alt="">
+                                </section>
+                                <section class="product-content">
+                                    <h3 class="product-name">Doraemon </h3>
+                                    <ul class="icon-group">
+                                        <li>
+                                            <a href="/chitietsach.html">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </section>
+                        </section>
+                        </article>
+                        <section class="product-grid-inner">
+                            <article class="product-card mix raucu">
+                                <section class="product-thumbnail">
+                                    <img src="https://cdn0.fahasa.com/media/catalog/product/9/7/9786043499506.jpg" alt="">
+                                </section>
+                                <section class="product-content">
+                                    <h3 class="product-name">Tôi Tìm Mình Giữa Những Tháng Năm</h3>
+                                </section>
+                                <ul class="icon-group">
+                                    <li>
+                                        <a href="/chitietsach.html">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </article>
+                        </section>
+                        <section class="product-grid-inner">
+                            <article class="product-card mix raucu">
+                                <section class="product-thumbnail">
+                                    <img src="https://down-vn.img.susercontent.com/file/0508bc9a31bb4bd7767930d1f1582b61" alt="">
+                                </section>
+                                <section class="product-content">
+                                    <h3 class="product-name">Nhà Giả Kim</h3>
+                                </section>
+                                <ul class="icon-group">
+                                    <li>
+                                        <a href="/chitietsach.html">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </article>
+                        </section>
+                        <section class="product-grid-inner">
+                            <article class="product-card mix tesla">
+                                <section class="product-thumbnail">
+                                    <img src="https://cdn0.fahasa.com/media/catalog/product/t/h/tham-tu-lung-danh-conan---tap-100---ban-thuong_3.jpg" alt="">
+                                </section>
+                                <section class="product-content">
+                                    <h3 class="product-name">Thám Tử Lừng Conan</h3>
+                                    <ul class="icon-group">
+                                        <li>
+                                            <a href="/chitietsach.html">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </section>
+                        </section>
+                        </article>
+                        <section class="product-grid-inner">
+                            <article class="product-card mix tesla">
+                                <section class="product-thumbnail">
+                                    <img src="https://product.hstatic.net/1000237375/product/bia_truoc_08_b4497226ce524fd79a1d81b9086b99a9_master.jpg" alt="">
+                                </section>
+                                <section class="product-content">
+                                    <h3 class="product-name">Tắt đèn</h3>
+                                    <ul class="icon-group">
+                                        <li>
+                                            <a href="/">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </section>
+                        </section>
+                        </article>
+                    </section>
+                </section>
+            </section>
+            <section class="hotline-section">
+                <video autoplay loop muted>
+                    <source src="video/production_id_4873467 (2160p).mp4" type="video/mp4">
+                </video>
+                <section class="hotline-section-content">
+                    <section class="hotline-content">
+                        <h2 class="hotline-title">Hotline</h2>
+                        <a class="hotline" href="tel:0369554785">0369554785</a>
+                    </section>
+                </section>
+            </section>
+        <!-- Footer section -->
+        <footer class="footer">
+            <section class="footer-links">
+                <section class="col-ft-1 ft">
+                    <ul class="footer-list">
+                    <html>
+                    </html>
+                    <script>
+                        var c = document.getElementById("myCanvas");
+                        var ctx = c.getContext("2d");
+                        ctx.beginPath();
+                        ctx.strokeStyle = "green";
+                        ctx.lineWidth = 1;
+                        ctx.arc(150, 80, 50, 0, 2 * Math.PI);
+                        ctx.stroke();    
+                        ctx.fillStyle = "green";  ctx.fill();
+                    
+                        ctx.font = "55px Arial";
+                        ctx.strokeStyle = "white";
+                        ctx.strokeText("F", 125, 90);
+                        ctx.font = "50px Arial";
+                        ctx.strokeStyle = "yellow ";
+                        ctx.strokeText("77",140, 100);
+                       
+                        ctx.font = "30px Verdana";
+                        </script>
+                            <!--  -->
+                        </li>
+                        <li>
+                            <a href="./LienHe.html">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <a>175 Tây Sơn, Đống Đa, Hà Nội </a>
+                            </a>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-mobile-screen-button"></i>
+                            <a class="thai" href="tel:0369554785">0369554785</a>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-envelope"></i>
+                            <a href="mailto:chukiet2609">chukiet2609@mail.com</a>
+                        </li>
+                    </ul>
+                    <section class="col-ft-1 ft-address">
+                    </section>
+                </section>
+                <section class="col-ft-2 ft">
+                    <h4>Thông tin</h4>
+                    <ul class="footer-list">
+                        <li>
+                            <a href="indexuser.html">
+                                <i class="fa-solid fa-caret-right"></i>
+                                Trang chủ
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./GioiThieu.html">
+                                <i class="fa-solid fa-caret-right"></i>
+                                Giới thiệu
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./TinTuc.html">
+                                <i class="fa-solid fa-caret-right"></i>
+                                Tin tức
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./LienHe.html">
+                                <i class="fa-solid fa-caret-right"></i>
+                                Liên hệ
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+                
+                <section class="col-ft-4 ft">
+                    <h4>Loại sách</h4>
+                    <ul class="footer-list">
+                        <li>
+                            <a href="tt.html">
+                                <i class="fa-solid fa-caret-right"></i>
+                               Truyện tranh
+                            </a>
+                        </li>
+                        <li>
+                            <a href="ttvh.html">
+                                <i class="fa-solid fa-caret-right"></i>
+                                Tiểu thuyết - văn học
+                            </a>
+                        </li>
+                        <li>
+                            <a href="ktct.html">
+                                <i class="fa-solid fa-caret-right"></i>
+                                Kinh tế chính trị
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html">
+                                <i class="fa-solid fa-caret-right"></i>
+                                Updating
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            </section>
+            <section class="footer-copyright">
+                <section class="copyright">
+                    <p>Copyright &copy;
+                        Email: <a href="chukiet2609@mail.com">&nbsp;chukiet2609@mail.com</a>
+                    </p>
+                </section>
+            </section>
+        </footer>
+    </section>
+    <script src="./js/app.js"></script>
+    <!-- <script src="https://uhchat.net/code.php?f=a6d88e"></script> -->
+</body>
+</html>
