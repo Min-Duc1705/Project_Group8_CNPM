@@ -31,8 +31,8 @@ svg {
 }
 .img-logo
 {
-    display: block;
-    max-width: 20%;
+    /* display: block; */
+    max-width: 80%;
 }
 
 input,
